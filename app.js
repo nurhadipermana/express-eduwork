@@ -1,17 +1,21 @@
+require('./config/mongoose');
 const express = require('express');
 const path = require('path');
 const app = express();
-const productRouter = require('./app/product/routes');
-const productRouterV2 = require('./app/product_v2/routes');
+// const productRouter = require('./app/product/routes');
+// const productRouterV2 = require('./app/product_v2/routes');
+const productRouterV3 = require('./app/product_v3/routes');
+const productRouterV4 = require('./app/product_v4/routes');
 const logger = require('morgan');
-
 
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'uploads')));
-app.use('/api/v1', productRouter);
-app.use('/api/v2', productRouterV2);
+// app.use('/api/v1', productRouter);
+// app.use('/api/v2', productRouterV2);
+app.use('/api/v3', productRouterV3);
+app.use('/api/v4', productRouterV4);
 app.use((req, res, next) => {
   res.status(404);
   res.send({
@@ -21,29 +25,29 @@ app.use((req, res, next) => {
 })
 app.listen(3000, () => console.log('Server: http://localhost:3000'))
 
-// const express = require('express');
-// const app = express();
-// const port = 3000;
+// // const express = require('express');
+// // const app = express();
+// // const port = 3000;
 
-// app.get('/', (req, res) => {
-//   res.sendFile('./index.html', { root: __dirname });
-// });
+// // app.get('/', (req, res) => {
+// //   res.sendFile('./index.html', { root: __dirname });
+// // });
 
-// app.get('/about', (req, res) => {
-//   // res.send('<h1>Ini adalah Halaman About</h1>');
-//   res.sendFile('./about.html', { root: __dirname });
-// });
+// // app.get('/about', (req, res) => {
+// //   // res.send('<h1>Ini adalah Halaman About</h1>');
+// //   res.sendFile('./about.html', { root: __dirname });
+// // });
 
-// app.get('/contact', (req, res) => {
-//   // res.send('<h1>Ini adalah Halaman Contact</h1>');
-//   res.sendFile('./contact.html', { root: __dirname });
-// });
+// // app.get('/contact', (req, res) => {
+// //   // res.send('<h1>Ini adalah Halaman Contact</h1>');
+// //   res.sendFile('./contact.html', { root: __dirname });
+// // });
 
-// app.use('/', (req, res) => {
-//   res.status('404');
-//   res.send('<h1>404</h1>');
-// });
+// // app.use('/', (req, res) => {
+// //   res.status('404');
+// //   res.send('<h1>404</h1>');
+// // });
 
-// app.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
+// // app.listen(port, () => {
+// //   console.log(`Example app listening at http://localhost:${port}`);
+// // });
